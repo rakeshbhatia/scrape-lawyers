@@ -222,6 +222,61 @@ class AttorneyScraper:
 			# Wait for all issued tasks to complete
 			pool.join()
 
+	def process_lawyer_data(self):
+		alphabet_pairs = list(itertools.product(list(string.ascii_lowercase), repeat=2))
+
+		print(alphabet_pairs)
+		print(len(alphabet_pairs))
+
+		'''df = pd.read_csv("zip-codes-ca.csv")
+
+		df1 = df.loc[df["Active"] < 500]
+		df2 = df.loc[df["Active"] >= 500]
+
+		print(len(df1))
+		print(len(df2))
+
+		df1.to_csv("zip-codes-ca-basic.csv")
+		df2.to_csv("zip-codes-ca-advanced.csv")'''
+
+		'''base_url = "https://apps.calbar.ca.gov/attorney/Licensee/Detail/"
+
+		df1 = pd.read_csv("lawyers-ca-basic-1.csv")
+		df2 = pd.read_csv("lawyers-ca-advanced-2.csv")
+
+		df1 = df1.loc[df1["Status"] == "Active"]
+		df2 = df2.loc[df2["Status"] == "Active"]
+
+		df1 = df1.reset_index(drop=True)
+		df2 = df2.reset_index(drop=True)
+
+		df = df1.append(df2, ignore_index=True)
+
+		df = df.reset_index(drop=True)
+
+		df = df.sort_values(by=["City", "Name"], ignore_index=True)
+
+		df = df.reset_index(drop=True)
+
+		df = df.astype(str)
+
+		df = df.drop_duplicates(subset=["Number"], keep="first", ignore_index=True)
+
+		df = df.reset_index(drop=True)
+
+		df["City"] = df["City"].str.lower()
+		df["City"] = df["City"].str.title()
+
+		df.to_csv("lawyers-ca.csv")
+
+		df["Calbar Website"] = base_url + df["Number"]
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+		df.to_csv("lawyers-ca.csv")'''
+
 	def scrape_lawyer(self, record):
 		print("Scraping entry: ", record[0])
 		print("Scraping lawyer: ", record[1])
@@ -315,75 +370,76 @@ class AttorneyScraper:
 
 		#self.lawyers_data.to_csv("lawyers-ca-data-1.csv")
 
-	def search_lawyers_alt(self):
-		alphabet_string = string.ascii_lowercase
-		alphabet_list = list(alphabet_string)
+	def clean_lawyers_data(self):
+		df = pd.read_csv("lawyers-ca-data.csv")
 
-		df = pd.DataFrame(columns=["Name", "Status", "Number", "City", "Admission Date"])
-		zip_codes = pd.read_csv("zip-codes-ca.csv")
-		zip_codes = df_zip.astype(str)
-		#zip_codes_list = df_zip["Zip Code"].tolist()
+		# Extract all lawyers with website
+		df1 = df.loc[df["Website"] != "Not Available"]
+		df1["Address"] = df1["Address"].str.lower()
+		df1["Address"] = df1["Address"].str.upper()
+		#df1["Email"] = df1["Email"].str.lower()
+		df1["Website"] = df1["Website"].str.lower()
 
-		# Scrape each zip code
-		for i in range(len(zip_codes)):
-			time.sleep(random.randint(0, 3))
-			#current = time.time()
-			#elapsed = current - start
-			#print("Zip code: {}".format(df_zip.loc[:, "Zip Code"]))
-			#print("Iteration {} of {}".format(i+1, len(df_zip)))
-			#print("{:.2%} completed".format(i/len(df_zip)))
-			#print("Elapsed time: {} seconds".format(elapsed))
+		print(df1.head())
+		print(df1.tail())
+		print(len(df1))
 
-			if zip_codes.loc[:, "Active"] > 500:
-				print("The current zip code has more than 500 entries")
-				for x in itertools.product(alphabet_list, repeat=2):
-					print("x[0], x[1]: {}, {}".format(x[0], x[1]))
-					# Generate custom search URL for the zip code
-					url = "https://apps.calbar.ca.gov/attorney/LicenseeSearch/AdvancedSearch?LastNameOption=b&LastName={}" \
-						  "&FirstNameOption=b&FirstName={}&MiddleNameOption=b&MiddleName=&FirmNameOption=b&FirmName=&City" \
-						  "Option=b&City=&State=&Zip={}&District=&County=&LegalSpecialty=&LanguageSpoken=&PracticeArea=#" \
-						  .format(x[0], x[1], zip_codes.loc[:, "Zip Code"])
+		# Sort by city
+		df1 = df1.sort_values(by=["City"], ignore_index=True)
 
-					# Get soup object
-					soup = self.get_soup(url)
-					tables = pd.read_html(soup.prettify())
-					#print(tables)
+		df1.to_csv("ca-lawyers-with-website-1.csv")
 
-					# Check if any results were found
-					if len(tables) < 4:
-						print("No results")
-						continue
-					else:
-						data = tables[3]
-						print(data.head())
-						df = df.append(data, ignore_index=True)
-			else:
-				# Generate custom search URL for the zip code
-				url = "https://apps.calbar.ca.gov/attorney/LicenseeSearch/AdvancedSearch?LastNameOption=b&LastName=" \
-					  "&FirstNameOption=b&FirstName=&MiddleNameOption=b&MiddleName=&FirmNameOption=b&FirmName=&City" \
-					  "Option=b&City=&State=&Zip={}&District=&County=&LegalSpecialty=&LanguageSpoken=&PracticeArea=#" \
-					  .format(zip_codes.loc[:, "Zip Code"])
+		# Extract all lawyers without website and with email
+		df2 = df.loc[(df2["Email"] != "Not Available") & (df["Website"] == "Not Available")]
 
-				soup = self.get_soup(url)
-				tables = pd.read_html(soup.prettify())
-				#print(tables)
+		df2["Address"] = df2["Address"].str.lower()
+		df2["Address"] = df2["Address"].str.upper()
+		df2["Email"] = df2["Email"].str.lower()
+		#df2["Website"] = df2["Website"].str.lower()
 
-				# Check if any results were found
-				if len(tables) < 4:
-					print("No results")
-					continue
-				else:
-					data = tables[3]
-					df = df.append(data, ignore_index=True)
+		# Remove lawyers with unwanted email providers
+		df2 = df2[~df2["Email"].str.contains("checkerspot.com")]
+		df2 = df2[~df2["Email"].str.contains("rocketmail.com")]
+		df2 = df2[~df2["Email"].str.contains("protonmail.com")]
+		df2 = df2[~df2["Email"].str.contains("earthlink.net")]
+		df2 = df2[~df2["Email"].str.contains("sbcglobal.net")]
+		df2 = df2[~df2["Email"].str.contains("verizon.net")]
+		df2 = df2[~df2["Email"].str.contains("comcast.net")]
+		df2 = df2[~df2["Email"].str.contains("hotmail.com")]
+		df2 = df2[~df2["Email"].str.contains("outlook.com")]
+		df2 = df2[~df2["Email"].str.contains("pacbell.net")]
+		df2 = df2[~df2["Email"].str.contains("disney.com")]
+		df2 = df2[~df2["Email"].str.contains("cydcor.com")]
+		df2 = df2[~df2["Email"].str.contains("icloud.com")]
+		df2 = df2[~df2["Email"].str.contains("yandex.com")]
+		df2 = df2[~df2["Email"].str.contains("yahoo.com")]
+		df2 = df2[~df2["Email"].str.contains("gmail.com")]
+		df2 = df2[~df2["Email"].str.contains("sonic.net")]
+		df2 = df2[~df2["Email"].str.contains("zoho.com")]
+		df2 = df2[~df2["Email"].str.contains("mail.com")]
+		df2 = df2[~df2["Email"].str.contains("msn.com")]
+		df2 = df2[~df2["Email"].str.contains("att.net")]
+		df2 = df2[~df2["Email"].str.contains("aol.com")]
+		df2 = df2[~df2["Email"].str.contains("gmx.com")]
+		df2 = df2[~df2["Email"].str.contains("hpe.com")]
+		df2 = df2[~df2["Email"].str.contains("me.com")]
+		df2 = df2[~df2["Email"].str.contains("cs.com")]
+		df2 = df2[~df2["Email"].str.contains("gmx.us")]
+		df2 = df2[~df2["Email"].str.contains(".edu")]
+		df2 = df2[~df2["Email"].str.contains(".gov")]
 
-		print(df.head())
-		print(df.tail())
-		print(df.columns)
-		print(len(df))
+		
 
-		df.to_csv("lawyers-ca-1.csv")
+		df2 = df2.sort_values(by=["City"], ignore_index=True)
 
-	def get_da_score(self):
+		print(df2.head())
+		print(df2.tail())
+		print(len(df2))
+
+
+	def scrape_da_score(self):
+		print("Scraping DA score")
+
 		# Get new driver
 		driver = self.browser()
 		driver.get(self.da_url)
@@ -407,6 +463,10 @@ class AttorneyScraper:
 
 		driver.quit()
 
+	def scrape_all_da_scores(self):
+		print("Scraping all DA scores")
+		self.scrape_da_score()
+
 def main():
 	start = time.time()
 
@@ -419,62 +479,8 @@ def main():
 	#scraper.search_lawyer_basic("94536")
 	#scraper.search_all_lawyers_basic()
 	#scraper.search_all_lawyers_advanced()
-	scraper.scrape_all_lawyers()
-	#scraper.get_da_score()
-
-	#alphabet_pairs = list(itertools.product(list(string.ascii_lowercase), repeat=2))
-
-	#print(alphabet_pairs)
-	#print(len(alphabet_pairs))
-
-	'''df = pd.read_csv("zip-codes-ca.csv")
-
-	df1 = df.loc[df["Active"] < 500]
-	df2 = df.loc[df["Active"] >= 500]
-
-	print(len(df1))
-	print(len(df2))
-
-	df1.to_csv("zip-codes-ca-basic.csv")
-	df2.to_csv("zip-codes-ca-advanced.csv")'''
-
-	'''base_url = "https://apps.calbar.ca.gov/attorney/Licensee/Detail/"
-
-	df1 = pd.read_csv("lawyers-ca-basic-1.csv")
-	df2 = pd.read_csv("lawyers-ca-advanced-2.csv")
-
-	df1 = df1.loc[df1["Status"] == "Active"]
-	df2 = df2.loc[df2["Status"] == "Active"]
-
-	df1 = df1.reset_index(drop=True)
-	df2 = df2.reset_index(drop=True)
-
-	df = df1.append(df2, ignore_index=True)
-
-	df = df.reset_index(drop=True)
-
-	df = df.sort_values(by=["City", "Name"], ignore_index=True)
-
-	df = df.reset_index(drop=True)
-
-	df = df.astype(str)
-
-	df = df.drop_duplicates(subset=["Number"], keep="first", ignore_index=True)
-
-	df = df.reset_index(drop=True)
-
-	df["City"] = df["City"].str.lower()
-	df["City"] = df["City"].str.title()
-
-	df.to_csv("lawyers-ca.csv")
-
-	df["Calbar Website"] = base_url + df["Number"]
-
-	print(df.head())
-	print(df.tail())
-	print(len(df))
-
-	df.to_csv("lawyers-ca.csv")'''
+	#scraper.scrape_all_lawyers()
+	scraper.clean_lawyers_data()
 
 	end = time.time()
 
