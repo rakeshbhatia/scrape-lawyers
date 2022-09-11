@@ -71,7 +71,7 @@ class AttorneyScraper:
 		options = uc.ChromeOptions()
 
 		# Add options arguments
-		options.add_argument('--headless')
+		options.add_argument("--headless")
 		options.add_argument(f"user-agent={self.get_user_agent()}")
 
 		# Instantiate driver
@@ -233,7 +233,7 @@ class AttorneyScraper:
 		print(alphabet_pairs)
 		print(len(alphabet_pairs))
 
-		'''df = pd.read_csv("zip-codes-ca.csv")
+		"""df = pd.read_csv("zip-codes-ca.csv")
 
 		df1 = df.loc[df["Active"] < 500]
 		df2 = df.loc[df["Active"] >= 500]
@@ -242,9 +242,9 @@ class AttorneyScraper:
 		print(len(df2))
 
 		df1.to_csv("zip-codes-ca-basic.csv")
-		df2.to_csv("zip-codes-ca-advanced.csv")'''
+		df2.to_csv("zip-codes-ca-advanced.csv")"""
 
-		'''base_url = "https://apps.calbar.ca.gov/attorney/Licensee/Detail/"
+		"""base_url = "https://apps.calbar.ca.gov/attorney/Licensee/Detail/"
 
 		df1 = pd.read_csv("lawyers-ca-basic-1.csv")
 		df2 = pd.read_csv("lawyers-ca-advanced-2.csv")
@@ -280,7 +280,7 @@ class AttorneyScraper:
 		print(df.tail())
 		print(len(df))
 
-		df.to_csv("lawyers-ca.csv")'''
+		df.to_csv("lawyers-ca.csv")"""
 
 	def scrape_lawyer(self, record):
 		print("Scraping entry: ", record[0])
@@ -392,7 +392,7 @@ class AttorneyScraper:
 
 		#df1["Website"] = df1["Website"].where(df1["Website"].str.startswith("http"), "http://" + df1["Website"])
 
-		#df['A'] = (df['A'] / 2).where(df['A'] < 20, df['A'] * 2)
+		#df["A"] = (df["A"] / 2).where(df["A"] < 20, df["A"] * 2)
 
 
 		# Remove lawyers with unwanted websites
@@ -429,7 +429,7 @@ class AttorneyScraper:
 		# Remove lawyers with unwanted email providers
 		df2 = df2[~df2["Email"].str.contains("|".join(unwanted))]
 
-		'''df2 = df2[~df2["Email"].str.contains("checkerspot.com")]
+		"""df2 = df2[~df2["Email"].str.contains("checkerspot.com")]
 		df2 = df2[~df2["Email"].str.contains("rocketmail.com")]
 		df2 = df2[~df2["Email"].str.contains("protonmail.com")]
 		df2 = df2[~df2["Email"].str.contains("earthlink.net")]
@@ -457,7 +457,7 @@ class AttorneyScraper:
 		df2 = df2[~df2["Email"].str.contains("cs.com")]
 		df2 = df2[~df2["Email"].str.contains("gmx.us")]
 		df2 = df2[~df2["Email"].str.contains(".edu")]
-		df2 = df2[~df2["Email"].str.contains(".gov")]'''
+		df2 = df2[~df2["Email"].str.contains(".gov")]"""
 
 		# Grab domain from email address
 		#df2["Website"] = "www." + df2["Email"].apply(lambda x: x.split("@")[1])
@@ -635,7 +635,7 @@ class AttorneyScraper:
 
 		#element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "example")))
 
-		'''try:
+		"""try:
 			element = WebDriverWait(driver, 30).until(
 				EC.presence_of_element_located((By.CLASS_NAME, "display table"))
 			)
@@ -645,7 +645,7 @@ class AttorneyScraper:
 			print(len(df))
 			df.to_csv("da-scores-final-test.csv", mode="a", index=False, header=False)
 		finally:
-			driver.quit()'''
+			driver.quit()"""
 
 		time.sleep(10)
 
@@ -764,7 +764,7 @@ class AttorneyScraper:
 		finally:
 			driver.quit()
 
-		'''df = pd.read_html(driver.page_source)[0]
+		"""df = pd.read_html(driver.page_source)[0]
 
 		print(df.head())
 		print(df.tail())
@@ -784,7 +784,7 @@ class AttorneyScraper:
 		driver.quit()
 
 		# Append data to CSV file
-		df.to_csv("accessily-da-scores.csv", mode="a", index=False, header=False)'''
+		df.to_csv("accessily-da-scores.csv", mode="a", index=False, header=False)"""
 
 	def scrape_all_da_scores2a(self):
 		print("Scraping all DA scores")
@@ -921,13 +921,13 @@ class AttorneyScraper:
 		df1 = pd.read_csv("ca-law-firms-with-website.csv")
 		df2 = pd.read_csv("da-scores-softo.csv")
 
-		'''print(df1.head())
+		"""print(df1.head())
 		print(df1.tail())
 		print(len(df1))
 
 		print(df2.head())
 		print(df2.tail())
-		print(len(df2))'''	
+		print(len(df2))"""	
 
 		#df1.loc[df1["Website"].isin(df2["Website"]), "DA Score"] = df2.loc[df2["Website"].isin(df1["Website"]), "DA Score"].values
 		#df1.loc[df1["Website"].isin(df2["Website"]), "DA Score"] = df2["DA Score"].values
@@ -1099,11 +1099,17 @@ class AttorneyScraper:
 		df["Website"] = df["Website"].str.lower()
 
 		# Remove lawyers with unwanted websites
-		unwanted = ["checkerspot.com", "rocketmail.com", "protonmail.com", "earthlink.net", "sbcglobal.net", "samsung.com", 
+		"""unwanted = ["checkerspot.com", "rocketmail.com", "protonmail.com", "earthlink.net", "sbcglobal.net", "samsung.com", 
 					"facebook.com", "linkedin.com", "verizon.net", "verizon.com", "comcast.net", "hotmail.com", 
 					"outlook.com", "pacbell.net", "disney.com", "cydcor.com", "icloud.com", "yandex.com", "yahoo.com", 
 					"gmail.com", "sonic.net", "zoho.com", "mail.com", "msn.com", "att.net", "aol.com", "gmx.com", 
-					"hpe.com", "me.com", "cs.com", "gmx.us", "bit.ly", "ca.us", ".edu", ".gov", ".mil"]
+					"hpe.com", "me.com", "cs.com", "gmx.us", "bit.ly", "ca.us", ".edu", ".gov", ".mil"]"""
+
+		unwanted = ["thecheesecakefactory.com", "roadrunner.com", "checkerspot.com", "rocketmail.com", "protonmail.com", "earthlink.net", "sbcglobal.net", "brightview.com", 
+					"samsung.com", "facebook.com", "linkedin.com", "verizon.net", "verizon.com", "comcast.net", "hotmail.com", "outlook.com", 
+					"pacbell.net", "disney.com", "cydcor.com", "icloud.com", "yandex.com", "yahoo.com", "gmail.com", "sonic.net", "zoho.com", "qnet.com",
+					"mail.com", "msn.com", "att.net", "aol.com", "gmx.com", "hpe.com", "me.com", "cs.com", "gmx.us", "bit.ly", "ca.us", ".edu", 
+					".gov", ".mil"]
 
 		df = df[~df["Website"].str.contains("|".join(unwanted))]
 
@@ -1117,13 +1123,13 @@ class AttorneyScraper:
 		df["Law Firm"] = df["Law Firm"].str[:-2]
 		df["Law Firm"] = df["Law Firm"].str.replace(", PO Bo", "")
 
-		df = df[["Name", "Law Firm", "City", "Email", "Website"]].copy()
+		df = df[["Name", "City", "Law Firm", "Address", "Email", "Website"]].copy()
 
 		print(df.head())
 		print(df.tail())
 		print(len(df))
 
-		'''df1 = df[df["Address Part 1"] == ""]
+		"""df1 = df[df["Address Part 1"] == ""]
 
 		print(df1.head())
 		print(df1.tail())
@@ -1133,7 +1139,7 @@ class AttorneyScraper:
 
 		print(df2.head())
 		print(df2.tail())
-		print(len(df2))'''
+		print(len(df2))"""
 
 		df.to_csv("ca-lawyers-with-website-only-final-cleaned.csv", index=False)
 
@@ -1166,6 +1172,515 @@ class AttorneyScraper:
 
 		df1.to_csv("ca-lawyers-with-website-only-final-cleaned-da-score-30.csv", index=False)
 
+	def final_processing10(self):
+		df = pd.read_csv("ca-lawyers-with-website-only-final-cleaned-da-score-30.csv", na_filter=False)
+
+		df = df[df["Email"] == "not available"]
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+	def final_processing11(self):
+		df = pd.read_csv("ca-lawyers-data.csv", na_filter=False)
+		df = df.astype(str)
+
+		df = df[(df["Email"] != "Not Available") & (df["Website"] == "Not Available")]
+
+		#print(df.dtypes)
+		#print(df.head())
+		#print(df.tail())
+		#print(len(df))
+
+		df["Email"] = df["Email"].str.lower()
+
+		excluded_court = ["occourts.org", "sb-court.org", "lacourt.org", "lasuperiorcourt.org", "yubacourts.org", "mercedcourt.org", "eldoradocourt.org", "sanmateocourt.org", 
+						  "sb-courts.org", "scscourt.org", "sbcourts.org", "santacruzcourt.org", "sonomacourt.org", "sjcourts.org", "suttercourts.com"]
+
+		excluded_city = ["alamedacityattorney.org", "bakersfieldcity.us", "cityofberkeley.info", "city-attorney.com", "comptoncity.org", "cityofconcord.org",
+						 "crescentcity.org", "culvercity.org", "dalycity.org", "elkgrovecity.org", "cityofgoleta.org", "cityofhawthorne.org", "surfcity-hb.org",
+						 "cityoflancasterca.org", "cityoflivermore.net", "lacity.org", "atty.lacity.org", "cityview.com", "cityofmerced.org", "cityofnapa.org",
+						 "oaklandcityattorney.org", "cityoforange.org", "cityofpaloalto.org", "cityofpasadena.net", "cityworksinc.org", "cityofpetaluma.org", 
+						 "cityofredding.org", "redwoodcity.org", "cityofsacramento.org", "rivercitybank.com", "sfcityatty.org", "slocity.org", "cityofsanmateo.org",
+						 "cityofsantamaria.org", "surfcity.net", "srcity.org", "cityofslt.us", "cityofvacaville.com", "cityofvallejo.net", "hacityventura.org", 
+						 "cityofwestsacramento.org"]
+
+		excluded_county = ["stancounty.com", "kerncounty.com", "theurbannestnorthcounty.com", "countyofcolusa.com", "countyofcolusa.org", "solanocounty.com", 
+						   "solanocountylawyer.com", "mendocinocounty.org", "inyocounty.us", "lacountyda.org", "lacountypubdef.org", "madera-county.com", 
+						   "maderacounty.com", "mariposacounty.org", "cc.cccounty.us", "dcss.cccounty.us", "pd.cccounty.us", "countyofmerced.com", "countyofnapa.org", 
+						   "nevadacountycourts.com", "marincounty.org", "buttecounty.net", "countyofplumas.com", "saccounty.net", "pd.sbcounty.go", "countyofsb.org", 
+						   "santacruzcounty.us", "sonoma-county.org", "mendocinocounty.com", "tularecountylaw.com", "sdcountytrusts.com", "trinitycounty.org", 
+						   "countyofglenn.net", "ccm.yolocounty.org", "yolocounty.org", "ventura.org"]
+
+		# Remove lawyers with unwanted emails
+		unwanted = [".edu", ".gov", ".mil", "ca.us", "1cbank", "qq.com", "me.com", "cs.com", "gmx.us", "bit.ly", "uhc.com", "wmg.com", "dga.org", "cnb.com", "msn.com", "att.net", "aol.com", "mac.com", "mgm.com", "cox.net", "zorro.com", 
+					"gmx.com", "hpe.com", "live.com", "divx.com", "iehp.org", "ah4r.com", "khov.com", "sfhp.org", "cbre.com", "zoho.com", "qnet.com", "scif.com", "mail.com", "mavtv.com", "frbsf.org", "epson.com", "bayer.com", 
+					"tesla.com", "yahoo.com", "gmail.com", "intel.com", "sonic.net", "apple.com", "acphd.org", "waltdisney", "edf-re.com", "icumed.com", "davita.com", "abbott.com", "disney.com", "cydcor.com", "mindspring.com", "borregohealth.org", 
+					"yandex.com", "google.com", "icloud.com", "tubitv.com", "nvidia.com", "vna.health", "legionm.com", "samsung.com", "calfund.org", "tinyurl.com", "phcdocs.org", "verizon.net", "anaheim.net", "oscars.org", "pmhd.org", 
+					"verizon.com", "comcast.net", "hotmail.com", "outlook.com", "udacity.com", "chevron.com", "firstam.com", "agilent.com", "8minute.com", "altamed.org", "hotbench.tv", "pacbell.net", "netscape.net", "studio71us.com", 
+					"rivcoda.org", "gvhomes.com", "deloitte.com", "facebook.com", "linkedin.com", "teamwass.com", "qualcomm.com", "bankofamerica", "viacomcbs.com", "paramount.com", "dollskill.com", "theagencyre.com", "unitedtalent.com", 
+					"earthlink.net", "sbcglobal.net", "coveredca.com", "viacomcbs.com", "fremantle.com", "ovationtv.com", "peacocktv.com", "lucasfilm.com", "ingrooves.com", "livenation.com", "wmeagency.com", "psln.com", "cbbank.com", 
+					"warnerbros.com", "wellsfargo.com", "roadrunner.com", "brightview.com", "rocketmail.com", "protonmail.com", "salesforce.com", "bridgebank.com", "montecito.bank", "silvergate.com", 
+					"aidshealth.org", "uclahealth.org", "smartvoter.org", "servicenow.com", "progressive.com", "playstation.com", "virginorbit.com", "aegpresents.com", "checkerspot.com", "kernmedical.com", 
+					"hingehealth.com", "denovahomes.com", "homebaseccc.org", "sonypictures.com", "eastwestbank.com", "carbonhealth.com", "nbcuniversal.com", "landseahomes.com", "scrippshealth.org", 
+					"commercecasino.com", "universalmusic.com", "relativityspace.com", "adventisthealth.org", "molinahealthcare.com", "mrcentertainment.com", "createmusicgroup.com", "firstfoundationinc.com", 
+					"stanfordhealthcare.org", "thecheesecakefactory.com", "entertainmentstudios.com", "discoverybehavioralhealth.com"]
+
+		df = df[~df["Email"].str.contains("|".join(excluded_court))]
+		df = df[~df["Email"].str.contains("|".join(excluded_city))]
+		df = df[~df["Email"].str.contains("|".join(excluded_county))]
+		df = df[~df["Email"].str.contains("|".join(unwanted))]
+
+		new = df["Email"].str.split("@", expand = True)
+
+		df["Website"] = new[1]
+
+		#df = df[~df["Website"].str.contains("|".join(excluded_city))]
+		#df = df[~df["Website"].str.contains("|".join(excluded_county))]
+		#df = df[~df["Website"].str.contains("|".join(unwanted))]
+
+		#address = df["Address"].str.split(",", expand=True)
+		pattern = r"^(\D*)\d"
+		df["Law Firm"] = df["Address"].str.extract(pattern, expand=False)
+		df["Law Firm"] = df["Law Firm"].str[:-2]
+		df["Law Firm"] = df["Law Firm"].str.replace(", PO Bo", "")
+		df["Law Firm"] = df["Law Firm"].str.replace(", P O Bo", "")
+
+		# Sort by city
+		df = df.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df = df.reset_index(drop=True)
+
+		df = df[["Name", "City", "Law Firm", "Address", "Email", "Website"]].copy()
+
+		df["DA Score"] = ""
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+		#print(df[df["Website"].str.contains("health", na=False)]["Website"].unique().tolist())
+
+		df.to_csv("ca-lawyers-with-email-only-final.csv", index=False)
+
+	def final_processing12(self):
+		df1 = pd.read_csv("ca-lawyers-with-email-only-final.csv", na_filter=False)
+		df2 = pd.read_csv("ca-lawyers-with-website-only-final-cleaned-da-score-30.csv", na_filter=False)
+
+		df1 = df1.astype(str)
+		df2 = df2.astype(str)
+
+		urls = df2["Website"].tolist()
+		da_scores = df2["DA Score"].tolist()
+
+		#print(len(urls))
+		#print(len(da_scores))
+
+		for i in range(len(urls)):
+			df1.loc[df1["Website"] == urls[i], "DA Score"] = da_scores[i]
+
+		df3 = df1[df1["DA Score"] != ""]
+		df3 = df3.reset_index(drop=True)
+
+		print(df3.head())
+		print(df3.tail())
+		print(len(df3))
+
+		df = df2.append(df3, ignore_index=True)
+
+		excluded_court = ["occourts.org", "sb-court.org", "lacourt.org", "lasuperiorcourt.org", "yubacourts.org", "mercedcourt.org", "eldoradocourt.org", "sanmateocourt.org", 
+						  "sb-courts.org", "scscourt.org", "sbcourts.org", "santacruzcourt.org", "sonomacourt.org", "sjcourts.org", "suttercourts.com", "stanct.org", "nccn.net", 
+						  "sftc.org", "fnf.com", "roll.com", "fd.org", "eero.com", "okta.com", "amat.com"]
+
+		excluded_city = ["alamedacityattorney.org", "bakersfieldcity.us", "cityofberkeley.info", "city-attorney.com", "comptoncity.org", "cityofconcord.org",
+						 "crescentcity.org", "culvercity.org", "dalycity.org", "elkgrovecity.org", "cityofgoleta.org", "cityofhawthorne.org", "surfcity-hb.org",
+						 "cityoflancasterca.org", "cityoflivermore.net", "lacity.org", "atty.lacity.org", "cityview.com", "cityofmerced.org", "cityofnapa.org",
+						 "oaklandcityattorney.org", "cityoforange.org", "cityofpaloalto.org", "cityofpasadena.net", "cityworksinc.org", "cityofpetaluma.org", 
+						 "cityofredding.org", "redwoodcity.org", "cityofsacramento.org", "rivercitybank.com", "sfcityatty.org", "slocity.org", "cityofsanmateo.org",
+						 "cityofsantamaria.org", "surfcity.net", "srcity.org", "cityofslt.us", "cityofvacaville.com", "cityofvallejo.net", "hacityventura.org", 
+						 "cityofwestsacramento.org", "anaheim.net", "burlingame.org", "cupertino.org", "coh.org", "ladwp.com", "mindspring.com", "newark.org", 
+						 "redondo.org", "sfha.org", "santa-ana.org", "simivalley.org", "toaks.org", "walnut-creek.org", "weho.org"]
+
+		excluded_county = ["stancounty.com", "kerncounty.com", "theurbannestnorthcounty.com", "countyofcolusa.com", "countyofcolusa.org", "solanocounty.com", 
+						   "solanocountylawyer.com", "mendocinocounty.org", "inyocounty.us", "lacountyda.org", "lacountypubdef.org", "madera-county.com", 
+						   "maderacounty.com", "mariposacounty.org", "cc.cccounty.us", "dcss.cccounty.us", "pd.cccounty.us", "countyofmerced.com", "countyofnapa.org", 
+						   "nevadacountycourts.com", "marincounty.org", "buttecounty.net", "countyofplumas.com", "saccounty.net", "pd.sbcounty.go", "countyofsb.org", 
+						   "santacruzcounty.us", "sonoma-county.org", "mendocinocounty.com", "tularecountylaw.com", "sdcountytrusts.com", "trinitycounty.org", 
+						   "countyofglenn.net", "ccm.yolocounty.org", "yolocounty.org", "ventura.org", "apalc.org", "pcwa.net", "kcera.org", "kcwa.com", "ocde.us", 
+						   "smharbor.com", "fcoe.org", "cosb.us", "firstteam.com", "lafsbc.org", "lalawlibrary.org", "lasd.org", "metro.net", "yubawater.org", 
+						   "juno.com", "stanct.org", "nccn.net", "choc.org", "lacera.com", "rcoe.us", "counties.org", "scoe.net", 
+						   "gosbcta.com", "san.org", "sdapcd.org", "sdcwa.org", "sfha.org", "catholiccharitiesscc.org", "sccba.com", "mac.com", "habitatoc.org", 
+						   "ocsd.org", "rcocdd.com", "coco.net.org"]
+
+		excluded_health = ["alamedaalliance.org", "bayer.com", "pmhd.org", "color.com", "lyrahealth.com", "sutterhealth.org", "communitymedical.org", "brighthealthcare.com", 
+						   "nanthealth.com", "pipelinehealth.us", "sidecarhealth.com", "northbay.org", "partnershiphp.org", "memorialcare.org", "gvhc.org", "healthcomp.com", 
+						   "cigna.com", "commonspirit.org", "dignityhealth.org", "mymarinhealth.org", "landmarkhealth.org", "primehealthcare.com", "bestlife.com", "dentalxchange.com", 
+						   "fphcare.com", "healthpeak.com", "mac.com", "nextgen.com", "onedigital.com", "providence.org", "apria.com", "agilonhealth.com", "scanhealthplan.com", "ahf.org", 
+						   "healthmanagement.com", "lacare.org", "valleychildrens.org", "hioscar.com", "healthiq.com", "olehealth.org", "alamedahealthsystem.org", "elemenohealth.com", 
+						   "kp.org", "phi.org", "eisenhowerhealth.org", "guardanthealth.com", "changehealthcare.com", "hnfs.com", "westernhealth.com", "amnhealthcare.com", "ayahealthcare.com", 
+						   "fhcsd.org", "lamaestra.org", "medimpact.com", "rchsd.org", "sharp.com", "castlighthealth.com", "forhims.com", "ginger.io", "komodohealth.com", "omadahealth.com", 
+						   "quantumleaphealth.org", "palomarhealth.org", "evidation.com", "tenethealth.com", "lifegen.net", "cencalhealth.org", "sbch.org", "ehealth.com", "cmhshealth.org", 
+						   "fhcn.org", "johnmuirhealth.com", "emanatehealth.org", "borregohealth.org", "lyrahealth.com", "sutterhealth.org", "brighthealthcare.com", "nanthealth.com", 
+						   "pipelinehealth.us", "sidecarhealth.com", "healthcomp.com", "dignityhealth.org", "mymarinhealth.org", "landmarkhealth.org", "primehealthcare.com", "11health.com", 
+						   "healthpeak.com", "agilonhealth.com", "scanhealthplan.com", "health-law.com", "healthmanagement.com", "healthiq.com", "olehealth.org", "alamedahealthsystem.org", 
+						   "elemenohealth.com", "eisenhowerhealth.org", "adverahealth.com", "guardanthealth.com", "changehealthcare.com", "westernhealth.com", "amnhealthcare.com", "ayahealthcare.com", 
+						   "castlighthealth.com", "komodohealth.com", "omadahealth.com", "quantumleaphealth.org", "palomarhealth.org", "tenethealth.com", "cencalhealth.org", "ehealth.com", "cmhshealth.org", 
+						   "johnmuirhealth.com", "emanatehealth.org", "evolenthealth.com"]
+
+		excluded_medical = ["coh.org", "novartis.com", "communitymedical.org", "samc.com", "mymarinhealth.org", "inarimedical.com", "varian.com", "cshs.org", "prospectmedical.com", 
+							"talisbio.com", "kp.org", "recormedical.com", "eisenhowerhealth.org", "appliedmedical.com", "cmadocs.org", "medpro.com", "revamedical.com", "onemedical.com", 
+							"reflexion.com", "shockwavemedical.com", "us.medical.canon", "avitamedical.com", "communitymedical.org", "inarimedical.com", "prospectmedical.com", "recormedical.com", 
+							"appliedmedical.com", "revamedical.com", "onemedical.com", "shockwavemedical.com", "us.medical.canon", "avitamedical.com"]
+
+		excluded_bio = ["cariboubio.com", "pivotbio.com", "nantworks.com", "novartis.com", "arcusbio.com", "bio-rad.com", "powercrunch.com", "pumabiotechnology.com", "pacb.com", "talisbio.com", 
+						"atarabio.com", "bmrn.com", "bridgebio.com", "coherus.com", "twistbioscience.com", "3ds.com", "bioatla.com", "biosplice.com", "neurocrine.com", "phasebio.com", "gatesfoundation.org", 
+						"vir.bio", "kronosbio.com", "ngmbio.com", "sana.com", "sutrobio.com", "avidbio.com", "arcusbio.com", "bio-rad.com", "pumabiotechnology.com", "talisbio.com", "atarabio.com", "bridgebio.com", 
+						"twistbioscience.com", "bioatla.com", "biosplice.com", "phasebio.com", "us.ajibio-pharma.com", "vir.bio", "kronosbio.com", "missionbio.com", "ngmbio.com", "sutrobio.com", "avidbio.com", 
+						"veeva.com", "vir.bio", "kronosbio.com", "lionsgate.com", "missionbio.com", "ngmbio.com", "sutrobio.com", "avidbio.com"]
+
+		excluded_entertainment = ["dmg-entertainment.com", "imagine-entertainment.com", "dcentertainment.com", "ep.com", "legendary.com", "stxentertainment.com", "mgae.com", "prodigy.net", 
+								  "sonymusic.com", "spe.sony.com", "spp11.msmail.spe.sony.com", "konami.com", "firstent.org", "aegworldwide.com", "condenast.com", "es.tv", "fox.com", 
+								  "halcyonstudios.tv", "interplay.com", "marvista.net", "sony.com", "vreg.com", "webtoon.com", "bentoboxent.com", "lionsgate.com", "starz.com", "cbs.com", 
+								  "lightyear.com", "nbcuni.com", "electricentertainment.com", "c3entertainment.com", "dcentertainment.com", "stxentertainment.com", "electricentertainment.com"]
+
+		excluded_studio = ["bronstudios.com", "mgm.com", "abc.com", "amazon.com", "amazonstudios.com", "technicolor.com", "pixar.com", "boatrocker.com", "cbs.com", "es.tv", "itv.com", 
+						   "pilgrimstudios.com", "mbww.com", "nbcuni.com", "studio71us.com", "halcyonstudios.tv", "x2studios.com"]
+
+		excluded_media = ["fandango.com", "bydeluxe.com", "turner.com", "viacom.com", "warnermedia.com", "salem.cc", "salemmedia.com", "juno.com", "nfl.com", "participant.com", "propelmedia.com", 
+						  "boatrocker.com", "es.tv", "jukinmedia.com", "madisonwellsmedia.com", "walden.com", "medianewsgroup.com", "pandora.com", "encompass.tv", "newmediarights.org", "wikimedia.org", 
+						  "cox.net", "mbww.com", "redbull.com", "skydance.com", "crownmedia.com", "intermedia.net", "nbcuni.com", "visionmedia.com", "pilgrimmediagroup.com", "voxmedia.com", 
+						  "salemmedia.com", "groupninemedia.com", "mediaone.net", "shedmedia.com", "jukinmedia.com", "newmediarights.org", "industrial-media.com"]
+
+		excluded_music = ["afm.org", "peermusic.com", "sonymusic.com", "fender.com", "globalmusicrights.com", "umusic.com", "warnerchappell.com", "warnerchappellpm.com", "manifesto.com", "extrememusic.com", 
+						  "musicreports.com", "umusic.com"]
+
+		excluded_tv = ["spe.sony.com", "directv.com", "betfair.com", "foxtv.com", "nextvr.com", "itv.com", "amctv.com", "amptp.org", "nbcuni.com", "cwtv.com", "telepixtv.com", "directv.com", "revry.tv", 
+					   "belmontvillage.com", "es.tv", "foxtv.com", "halcyonstudios.tv", "nextvr.com", "itv.com", "encompass.tv", "ymcaeastvalley.org", "tatari.tv", "tubi.tv", 
+					   "twitch.tv", "amctv.com", "netvision.net.il", "cwtv.com", "telepixtv.com", "revry.tv", "capphysicians.com", "belmontvillage.com", "bnymellon.com", "es.tv", "foxtv.com", 
+					   "halcyonstudios.tv", "nextvr.com", "itv.com", "thezenith.com", "encompass.tv", "ymcaeastvalley.org", "lighthouseglobal.com", "tatari.tv", "amctv.com", "netvision.net.il"]
+
+		excluded_film = ["ubisoft.com", "ifta-online.org", "miramax.com", "lionsgate.com", "openroadfilms.com", "filmrise.com", "openroadfilms.com", "a24films.com", "filmrise.com"]
+
+		excluded_bank = ["bankspower.com", "truist.com", "tcbk.com", "fremontbank.com", "pacwest.com", "camoves.com", "mechanicsbank.com", "ppbi.com", "unionbank.com", "bankofhope.com", "bofa.com", "citi.com", 
+						 "firstrepublic.com", "hanmi.com", "jpmorgan.com", "us.mufg.jp", "usbank.com", "svb.com", "cbbank.com", "comerica.com", "bankofthewest.com", "cit.com", "sacramentofoodbank.org", "softbank.com", 
+						 "axosbank.com", "bnymellon.com", "fhlbsf.com", "lendingclub.com", "sf.frb.org", "bostonprivate.com", "db.com", "exchangebank.com", "jpmchase.com", "cathaybank.com", "bankspower.com", "cbbank.com", 
+						 "bofifederalbank.com", "fremontbank.com", "mechanicsbank.com", "unionbank.com", "bankofthewest.com", "bankofhope.com", "usbank.com", "sacramentofoodbank.org", "axosbank.com", "exchangebank.com", 
+						 "nextgen.com", "unionbank.com", "bankofthewest.com", "bankofhope.com", "fb.com", "sacramentofoodbank.org", "axosbank.com", "lockton.com", "exchangebank.com"]
+
+		excluded_financial = ["afncorp.com", "riafinancial.com", "civicfs.com", "smartfinancial.com", "broadridge.com", "athene.com", "cetera.com", "principal.com", "amtrustgroup.com", "fnf.com", "lpl.com", "finra.org", 
+							  "hanmi.com", "prudential.com", "ubs.com", "westlakefinancial.com", "etrade.com", "ladderlife.com", "coop.org", "mwfinc.com", "bolt.com", "truelinkfinancial.com", "bills.com", "svb.com", 
+							  "homebridge.com", "pennymac.com", "riafinancial.com", "smartfinancial.com", "westlakefinancial.com", "truelinkfinancial.com"]
+
+		excluded_insurance = ["doma.com", "marshmma.com", "pacificspecialty.com", "cna.com", "selective.com", "libertymutual.com", "travelers.com", "hanover.com", "newyorklife.com", "bestlife.com", "lockton.com", "aig.com", 
+							  "archinsurance.com", "chubb.com", "ctt.com", "farmersinsurance.com", "heffins.com", "alliant.com", "thezenith.com", "allstate.com", "amfam.com", "fnf.com", "wawanesa.com", "bhhc.com", "epicbrokers.com", 
+							  "everestre.com", "metlife.com", "nationwide.com", "ortc.com", "willis.com", "zurichna.com", "afgroup.com", "twc.com", "insurancefornonprofits.org", "higginbotham.net", "axaxl.com", "csaa.com", "pmigroup.com", 
+							  "copperpoint.com", "markel.com", "mercuryinsurance.com", "archinsurance.com", "farmersinsurance.com", "cseinsurance.com", "insurancefornonprofits.org"]
+
+		# Remove lawyers with unwanted emails
+		unwanted = [".edu", ".mil", ".gov", "ca.us", "me.com", "1cbank", "cs.com", "qq.com", "gmx.us", "bit.ly", "cox.net", "hpe.com", "att.net", "dga.org", "aol.com", "uhc.com", "mac.com", "mgm.com", "cnb.com", "msn.com", 
+					"wmg.com", "fox.com", "gmx.com", "cbre.com", "psln.com", "zoho.com", "sfhp.org", "khov.com", "ah4r.com", "qnet.com", "divx.com", "scif.com", "mail.com", "iehp.org", "live.com", "pmhd.org", "gmail.com", 
+					"frbsf.org", "yahoo.com", "bayer.com", "zorro.com", "intel.com", "epson.com", "apple.com", "mavtv.com", "acphd.org", "sonic.net", "tesla.com", "oscars.org", "disney.com", "edf-re.com", "waltdisney", 
+					"nvidia.com", "google.com", "vna.health", "yandex.com", "cydcor.com", "abbott.com", "tubitv.com", "icumed.com", "cbbank.com", "davita.com", "icloud.com", "verizon.com", "outlook.com", "firstam.com", 
+					"hotbench.tv", "chevron.com", "udacity.com", "calfund.org", "anaheim.net", "comcast.net", "rivcoda.org", "8minute.com", "agilent.com", "hotmail.com", "phcdocs.org", "samsung.com", "tinyurl.com", "gvhomes.com", 
+					"legionm.com", "altamed.org", "verizon.net", "pacbell.net", "softbank.com", "fandango.com", "netscape.net", "linkedin.com", "facebook.com", "deloitte.com", "qualcomm.com", "teamwass.com", "ovationtv.com", 
+					"ingrooves.com", "coveredca.com", "dollskill.com", "peacocktv.com", "bankofamerica", "sbcglobal.net", "lucasfilm.com", "wmeagency.com", "fremantle.com", "paramount.com", "earthlink.net", "viacomcbs.com", 
+					"servicenow.com", "bridgebank.com", "livenation.com", "mindspring.com", "salesforce.com", "montecito.bank", "smartvoter.org", "roadrunner.com", "protonmail.com", "aidshealth.org", "rocketmail.com", 
+					"silvergate.com", "brightview.com", "warnerbros.com", "studio71us.com", "uclahealth.org", "wellsfargo.com", "virginorbit.com", "progressive.com", "denovahomes.com", "bronstudios.com", "homebaseccc.org", 
+					"hingehealth.com", "checkerspot.com", "theagencyre.com", "aegpresents.com", "kernmedical.com", "playstation.com", "nbcuniversal.com", "unitedtalent.com", "landseahomes.com", "carbonhealth.com", "sonypictures.com", 
+					"eastwestbank.com", "borregohealth.org", "scrippshealth.org", "universalmusic.com", "commercecasino.com", "paradigmagency.com", "discoverylandco.com", "relativityspace.com", "adventisthealth.org", "molinahealthcare.com", 
+					"mrcentertainment.com", "createmusicgroup.com", "dmg-entertainment.com", "firstfoundationinc.com", "stanfordhealthcare.org", "thecheesecakefactory.com", "entertainmentstudios.com", "discoverybehavioralhealth.com", 
+					"lakeshorelearning.com", "amat.com", "laird.com", "fbmsales.com"]
+
+		df = df[~df["Website"].str.contains("|".join(excluded_court))]
+		df = df[~df["Website"].str.contains("|".join(excluded_city))]
+		df = df[~df["Website"].str.contains("|".join(excluded_county))]
+		df = df[~df["Website"].str.contains("|".join(unwanted))]
+
+		pattern = r"^(\D*)\d"
+		df["Law Firm"] = df["Address"].str.extract(pattern, expand=False)
+		df["Law Firm"] = df["Law Firm"].str[:-2]
+		df["Law Firm"] = df["Law Firm"].str.replace(", PO Bo", "")
+		df["Law Firm"] = df["Law Firm"].str.replace(", P O Bo", "")
+
+		# Sort by city
+		df = df.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df = df.reset_index(drop=True)
+
+		df = df[["Name", "City", "Law Firm", "Address", "Email", "Website", "DA Score"]].copy()
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+		df.to_csv("ca-lawyers-with-email-and-website-da-score-30-batch-1.csv", index=False)
+
+		df4 = df1[df1["DA Score"] == ""]
+
+		df4 = df4[~df4["Website"].str.contains("|".join(excluded_court))]
+		df4 = df4[~df4["Website"].str.contains("|".join(excluded_city))]
+		df4 = df4[~df4["Website"].str.contains("|".join(excluded_county))]
+		df4 = df4[~df4["Website"].str.contains("|".join(unwanted))]
+
+		# Sort by city
+		df4 = df4.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df4 = df4.reset_index(drop=True)
+
+		df4 = df4[["Name", "City", "Law Firm", "Address", "Email", "Website", "DA Score"]].copy()
+
+		print(df4.head())
+		print(df4.tail())
+		print(len(df4))
+
+		df4.to_csv("ca-lawyers-with-email-and-website-da-score-unknown.csv", index=False)
+
+	def final_processing13(self):
+		df1 = pd.read_csv("ca-lawyers-with-email-and-website-da-score-unknown.csv", na_filter=False)
+		df2 = pd.read_csv("ca-law-firms-with-website-master.csv", na_filter=False)
+		
+		df1 = df1.astype(str)
+		df2 = df2.astype(str)
+
+		urls = df2["Website"].tolist()
+		da_scores = df2["DA Score"].tolist()
+
+		#print(len(urls))
+		#print(len(da_scores))
+
+		for i in range(len(urls)):
+			df1.loc[df1["Website"] == urls[i], "DA Score"] = da_scores[i]
+
+		df3 = df1[df1["DA Score"] != ""]
+
+		print("Before filtering")
+		print(df3.head())
+		print(df3.tail())
+		print(len(df3))
+
+		df3["DA Score"] = df3["DA Score"].astype(int)
+
+		df3 = df3[df3["DA Score"] >= 30]
+
+		df3 = df3.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df3 = df3.reset_index(drop=True)
+
+		print("After filtering")
+		print(df3.head())
+		print(df3.tail())
+		print(len(df3))
+
+		df3.to_csv("ca-lawyers-with-email-and-website-da-score-30-batch-2.csv", index=False)
+
+		df4 = df1[df1["DA Score"] == ""]
+
+		df4 = df4.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df4 = df4.reset_index(drop=True)
+
+		print(df4.head())
+		print(df4.tail())
+		print(len(df4))
+
+		df4.to_csv("ca-lawyers-with-email-and-website-da-score-unknown.csv", index=False)
+
+	def final_processing14(self):
+		df1 = pd.read_csv("ca-lawyers-with-email-and-website-da-score-30-batch-1.csv", na_filter=False)
+		df2 = pd.read_csv("ca-lawyers-with-email-and-website-da-score-30-batch-2.csv", na_filter=False)
+		df3 = pd.read_csv("ca-lawyers-with-email-and-website-da-score-30-batch-3.csv", na_filter=False)
+
+		df = pd.concat([df1, df2, df3], axis=0)
+
+		df = df.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df = df.reset_index(drop=True)
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+		excluded_court = ["occourts.org", "sb-court.org", "lacourt.org", "lasuperiorcourt.org", "yubacourts.org", "mercedcourt.org", "eldoradocourt.org", "sanmateocourt.org", 
+						  "sb-courts.org", "scscourt.org", "sbcourts.org", "santacruzcourt.org", "sonomacourt.org", "sjcourts.org", "suttercourts.com", "stanct.org", "nccn.net", 
+						  "sftc.org", "fnf.com", "roll.com", "fd.org", "eero.com", "okta.com", "amat.com"]
+
+		excluded_city = ["alamedacityattorney.org", "bakersfieldcity.us", "cityofberkeley.info", "city-attorney.com", "comptoncity.org", "cityofconcord.org",
+						 "crescentcity.org", "culvercity.org", "dalycity.org", "elkgrovecity.org", "cityofgoleta.org", "cityofhawthorne.org", "surfcity-hb.org",
+						 "cityoflancasterca.org", "cityoflivermore.net", "lacity.org", "atty.lacity.org", "cityview.com", "cityofmerced.org", "cityofnapa.org",
+						 "oaklandcityattorney.org", "cityoforange.org", "cityofpaloalto.org", "cityofpasadena.net", "cityworksinc.org", "cityofpetaluma.org", 
+						 "cityofredding.org", "redwoodcity.org", "cityofsacramento.org", "rivercitybank.com", "sfcityatty.org", "slocity.org", "cityofsanmateo.org",
+						 "cityofsantamaria.org", "surfcity.net", "srcity.org", "cityofslt.us", "cityofvacaville.com", "cityofvallejo.net", "hacityventura.org", 
+						 "cityofwestsacramento.org", "anaheim.net", "burlingame.org", "cupertino.org", "coh.org", "ladwp.com", "mindspring.com", "newark.org", 
+						 "redondo.org", "sfha.org", "santa-ana.org", "simivalley.org", "toaks.org", "walnut-creek.org", "weho.org"]
+
+		excluded_county = ["stancounty.com", "kerncounty.com", "theurbannestnorthcounty.com", "countyofcolusa.com", "countyofcolusa.org", "solanocounty.com", 
+						   "solanocountylawyer.com", "mendocinocounty.org", "inyocounty.us", "lacountyda.org", "lacountypubdef.org", "madera-county.com", 
+						   "maderacounty.com", "mariposacounty.org", "cc.cccounty.us", "dcss.cccounty.us", "pd.cccounty.us", "countyofmerced.com", "countyofnapa.org", 
+						   "nevadacountycourts.com", "marincounty.org", "buttecounty.net", "countyofplumas.com", "saccounty.net", "pd.sbcounty.go", "countyofsb.org", 
+						   "santacruzcounty.us", "sonoma-county.org", "mendocinocounty.com", "tularecountylaw.com", "sdcountytrusts.com", "trinitycounty.org", 
+						   "countyofglenn.net", "ccm.yolocounty.org", "yolocounty.org", "ventura.org", "apalc.org", "pcwa.net", "kcera.org", "kcwa.com", "ocde.us", 
+						   "smharbor.com", "fcoe.org", "cosb.us", "firstteam.com", "lafsbc.org", "lalawlibrary.org", "lasd.org", "metro.net", "yubawater.org", 
+						   "juno.com", "stanct.org", "nccn.net", "choc.org", "lacera.com", "rcoe.us", "counties.org", "scoe.net", 
+						   "gosbcta.com", "san.org", "sdapcd.org", "sdcwa.org", "sfha.org", "catholiccharitiesscc.org", "sccba.com", "mac.com", "habitatoc.org", 
+						   "ocsd.org", "rcocdd.com", "coco.net.org"]
+
+		excluded_health = ["alamedaalliance.org", "bayer.com", "pmhd.org", "color.com", "lyrahealth.com", "sutterhealth.org", "communitymedical.org", "brighthealthcare.com", 
+						   "nanthealth.com", "pipelinehealth.us", "sidecarhealth.com", "northbay.org", "partnershiphp.org", "memorialcare.org", "gvhc.org", "healthcomp.com", 
+						   "cigna.com", "commonspirit.org", "dignityhealth.org", "mymarinhealth.org", "landmarkhealth.org", "primehealthcare.com", "bestlife.com", "dentalxchange.com", 
+						   "fphcare.com", "healthpeak.com", "mac.com", "nextgen.com", "onedigital.com", "providence.org", "apria.com", "agilonhealth.com", "scanhealthplan.com", "ahf.org", 
+						   "healthmanagement.com", "lacare.org", "valleychildrens.org", "hioscar.com", "healthiq.com", "olehealth.org", "alamedahealthsystem.org", "elemenohealth.com", 
+						   "kp.org", "phi.org", "eisenhowerhealth.org", "guardanthealth.com", "changehealthcare.com", "hnfs.com", "westernhealth.com", "amnhealthcare.com", "ayahealthcare.com", 
+						   "fhcsd.org", "lamaestra.org", "medimpact.com", "rchsd.org", "sharp.com", "castlighthealth.com", "forhims.com", "ginger.io", "komodohealth.com", "omadahealth.com", 
+						   "quantumleaphealth.org", "palomarhealth.org", "evidation.com", "tenethealth.com", "lifegen.net", "cencalhealth.org", "sbch.org", "ehealth.com", "cmhshealth.org", 
+						   "fhcn.org", "johnmuirhealth.com", "emanatehealth.org", "borregohealth.org", "lyrahealth.com", "sutterhealth.org", "brighthealthcare.com", "nanthealth.com", 
+						   "pipelinehealth.us", "sidecarhealth.com", "healthcomp.com", "dignityhealth.org", "mymarinhealth.org", "landmarkhealth.org", "primehealthcare.com", "11health.com", 
+						   "healthpeak.com", "agilonhealth.com", "scanhealthplan.com", "health-law.com", "healthmanagement.com", "healthiq.com", "olehealth.org", "alamedahealthsystem.org", 
+						   "elemenohealth.com", "eisenhowerhealth.org", "adverahealth.com", "guardanthealth.com", "changehealthcare.com", "westernhealth.com", "amnhealthcare.com", "ayahealthcare.com", 
+						   "castlighthealth.com", "komodohealth.com", "omadahealth.com", "quantumleaphealth.org", "palomarhealth.org", "tenethealth.com", "cencalhealth.org", "ehealth.com", "cmhshealth.org", 
+						   "johnmuirhealth.com", "emanatehealth.org", "evolenthealth.com"]
+
+		excluded_medical = ["coh.org", "novartis.com", "communitymedical.org", "samc.com", "mymarinhealth.org", "inarimedical.com", "varian.com", "cshs.org", "prospectmedical.com", 
+							"talisbio.com", "kp.org", "recormedical.com", "eisenhowerhealth.org", "appliedmedical.com", "cmadocs.org", "medpro.com", "revamedical.com", "onemedical.com", 
+							"reflexion.com", "shockwavemedical.com", "us.medical.canon", "avitamedical.com", "communitymedical.org", "inarimedical.com", "prospectmedical.com", "recormedical.com", 
+							"appliedmedical.com", "revamedical.com", "onemedical.com", "shockwavemedical.com", "us.medical.canon", "avitamedical.com"]
+
+		excluded_bio = ["cariboubio.com", "pivotbio.com", "nantworks.com", "novartis.com", "arcusbio.com", "bio-rad.com", "powercrunch.com", "pumabiotechnology.com", "pacb.com", "talisbio.com", 
+						"atarabio.com", "bmrn.com", "bridgebio.com", "coherus.com", "twistbioscience.com", "3ds.com", "bioatla.com", "biosplice.com", "neurocrine.com", "phasebio.com", "gatesfoundation.org", 
+						"vir.bio", "kronosbio.com", "ngmbio.com", "sana.com", "sutrobio.com", "avidbio.com", "arcusbio.com", "bio-rad.com", "pumabiotechnology.com", "talisbio.com", "atarabio.com", "bridgebio.com", 
+						"twistbioscience.com", "bioatla.com", "biosplice.com", "phasebio.com", "us.ajibio-pharma.com", "vir.bio", "kronosbio.com", "missionbio.com", "ngmbio.com", "sutrobio.com", "avidbio.com", 
+						"veeva.com", "vir.bio", "kronosbio.com", "lionsgate.com", "missionbio.com", "ngmbio.com", "sutrobio.com", "avidbio.com"]
+
+		excluded_entertainment = ["dmg-entertainment.com", "imagine-entertainment.com", "dcentertainment.com", "ep.com", "legendary.com", "stxentertainment.com", "mgae.com", "prodigy.net", 
+								  "sonymusic.com", "spe.sony.com", "spp11.msmail.spe.sony.com", "konami.com", "firstent.org", "aegworldwide.com", "condenast.com", "es.tv", "fox.com", 
+								  "halcyonstudios.tv", "interplay.com", "marvista.net", "sony.com", "vreg.com", "webtoon.com", "bentoboxent.com", "lionsgate.com", "starz.com", "cbs.com", 
+								  "lightyear.com", "nbcuni.com", "electricentertainment.com", "c3entertainment.com", "dcentertainment.com", "stxentertainment.com", "electricentertainment.com"]
+
+		excluded_studio = ["bronstudios.com", "mgm.com", "abc.com", "amazon.com", "amazonstudios.com", "technicolor.com", "pixar.com", "boatrocker.com", "cbs.com", "es.tv", "itv.com", 
+						   "pilgrimstudios.com", "mbww.com", "nbcuni.com", "studio71us.com", "halcyonstudios.tv", "x2studios.com"]
+
+		excluded_media = ["fandango.com", "bydeluxe.com", "turner.com", "viacom.com", "warnermedia.com", "salem.cc", "salemmedia.com", "juno.com", "nfl.com", "participant.com", "propelmedia.com", 
+						  "boatrocker.com", "es.tv", "jukinmedia.com", "madisonwellsmedia.com", "walden.com", "medianewsgroup.com", "pandora.com", "encompass.tv", "newmediarights.org", "wikimedia.org", 
+						  "cox.net", "mbww.com", "redbull.com", "skydance.com", "crownmedia.com", "intermedia.net", "nbcuni.com", "visionmedia.com", "pilgrimmediagroup.com", "voxmedia.com", 
+						  "salemmedia.com", "groupninemedia.com", "mediaone.net", "shedmedia.com", "jukinmedia.com", "newmediarights.org", "industrial-media.com"]
+
+		excluded_music = ["afm.org", "peermusic.com", "sonymusic.com", "fender.com", "globalmusicrights.com", "umusic.com", "warnerchappell.com", "warnerchappellpm.com", "manifesto.com", "extrememusic.com", 
+						  "musicreports.com", "umusic.com"]
+
+		excluded_tv = ["spe.sony.com", "directv.com", "betfair.com", "foxtv.com", "nextvr.com", "itv.com", "amctv.com", "amptp.org", "nbcuni.com", "cwtv.com", "telepixtv.com", "directv.com", "revry.tv", 
+					   "belmontvillage.com", "es.tv", "foxtv.com", "halcyonstudios.tv", "nextvr.com", "itv.com", "encompass.tv", "ymcaeastvalley.org", "tatari.tv", "tubi.tv", 
+					   "twitch.tv", "amctv.com", "netvision.net.il", "cwtv.com", "telepixtv.com", "revry.tv", "capphysicians.com", "belmontvillage.com", "bnymellon.com", "es.tv", "foxtv.com", 
+					   "halcyonstudios.tv", "nextvr.com", "itv.com", "thezenith.com", "encompass.tv", "ymcaeastvalley.org", "lighthouseglobal.com", "tatari.tv", "amctv.com", "netvision.net.il"]
+
+		excluded_film = ["ubisoft.com", "ifta-online.org", "miramax.com", "lionsgate.com", "openroadfilms.com", "filmrise.com", "openroadfilms.com", "a24films.com", "filmrise.com"]
+
+		excluded_bank = ["bankspower.com", "truist.com", "tcbk.com", "fremontbank.com", "pacwest.com", "camoves.com", "mechanicsbank.com", "ppbi.com", "unionbank.com", "bankofhope.com", "bofa.com", "citi.com", 
+						 "firstrepublic.com", "hanmi.com", "jpmorgan.com", "us.mufg.jp", "usbank.com", "svb.com", "cbbank.com", "comerica.com", "bankofthewest.com", "cit.com", "sacramentofoodbank.org", "softbank.com", 
+						 "axosbank.com", "bnymellon.com", "fhlbsf.com", "lendingclub.com", "sf.frb.org", "bostonprivate.com", "db.com", "exchangebank.com", "jpmchase.com", "cathaybank.com", "bankspower.com", "cbbank.com", 
+						 "bofifederalbank.com", "fremontbank.com", "mechanicsbank.com", "unionbank.com", "bankofthewest.com", "bankofhope.com", "usbank.com", "sacramentofoodbank.org", "axosbank.com", "exchangebank.com", 
+						 "nextgen.com", "unionbank.com", "bankofthewest.com", "bankofhope.com", "fb.com", "sacramentofoodbank.org", "axosbank.com", "lockton.com", "exchangebank.com"]
+
+		excluded_financial = ["afncorp.com", "riafinancial.com", "civicfs.com", "smartfinancial.com", "broadridge.com", "athene.com", "cetera.com", "principal.com", "amtrustgroup.com", "fnf.com", "lpl.com", "finra.org", 
+							  "hanmi.com", "prudential.com", "ubs.com", "westlakefinancial.com", "etrade.com", "ladderlife.com", "coop.org", "mwfinc.com", "bolt.com", "truelinkfinancial.com", "bills.com", "svb.com", 
+							  "homebridge.com", "pennymac.com", "riafinancial.com", "smartfinancial.com", "westlakefinancial.com", "truelinkfinancial.com", "creditkarma.com"]
+
+		excluded_insurance = ["doma.com", "marshmma.com", "pacificspecialty.com", "cna.com", "selective.com", "libertymutual.com", "travelers.com", "hanover.com", "newyorklife.com", "bestlife.com", "lockton.com", "aig.com", 
+							  "archinsurance.com", "chubb.com", "ctt.com", "farmersinsurance.com", "heffins.com", "alliant.com", "thezenith.com", "allstate.com", "amfam.com", "fnf.com", "wawanesa.com", "bhhc.com", "epicbrokers.com", 
+							  "everestre.com", "metlife.com", "nationwide.com", "ortc.com", "willis.com", "zurichna.com", "afgroup.com", "twc.com", "insurancefornonprofits.org", "higginbotham.net", "axaxl.com", "csaa.com", "pmigroup.com", 
+							  "copperpoint.com", "markel.com", "mercuryinsurance.com", "archinsurance.com", "farmersinsurance.com", "cseinsurance.com", "insurancefornonprofits.org"]
+
+		# Remove lawyers with unwanted emails
+		unwanted = [".edu", ".mil", ".gov", "ca.us", "me.com", "1cbank", "cs.com", "qq.com", "gmx.us", "bit.ly", "cox.net", "hpe.com", "att.net", "dga.org", "aol.com", "uhc.com", "mac.com", "mgm.com", "cnb.com", "msn.com", 
+					"wmg.com", "fox.com", "gmx.com", "cbre.com", "psln.com", "zoho.com", "sfhp.org", "khov.com", "ah4r.com", "qnet.com", "divx.com", "scif.com", "mail.com", "iehp.org", "live.com", "pmhd.org", "gmail.com", 
+					"frbsf.org", "yahoo.com", "bayer.com", "zorro.com", "intel.com", "epson.com", "apple.com", "mavtv.com", "acphd.org", "sonic.net", "tesla.com", "oscars.org", "disney.com", "edf-re.com", "waltdisney", 
+					"nvidia.com", "google.com", "vna.health", "yandex.com", "cydcor.com", "abbott.com", "tubitv.com", "icumed.com", "cbbank.com", "davita.com", "icloud.com", "verizon.com", "outlook.com", "firstam.com", 
+					"hotbench.tv", "chevron.com", "udacity.com", "calfund.org", "anaheim.net", "comcast.net", "rivcoda.org", "8minute.com", "agilent.com", "hotmail.com", "phcdocs.org", "samsung.com", "tinyurl.com", "gvhomes.com", 
+					"legionm.com", "altamed.org", "verizon.net", "pacbell.net", "softbank.com", "fandango.com", "netscape.net", "linkedin.com", "facebook.com", "deloitte.com", "qualcomm.com", "teamwass.com", "ovationtv.com", 
+					"ingrooves.com", "coveredca.com", "dollskill.com", "peacocktv.com", "bankofamerica", "sbcglobal.net", "lucasfilm.com", "wmeagency.com", "fremantle.com", "paramount.com", "earthlink.net", "viacomcbs.com", 
+					"servicenow.com", "bridgebank.com", "livenation.com", "mindspring.com", "salesforce.com", "montecito.bank", "smartvoter.org", "roadrunner.com", "protonmail.com", "aidshealth.org", "rocketmail.com", 
+					"silvergate.com", "brightview.com", "warnerbros.com", "studio71us.com", "uclahealth.org", "wellsfargo.com", "virginorbit.com", "progressive.com", "denovahomes.com", "bronstudios.com", "homebaseccc.org", 
+					"hingehealth.com", "checkerspot.com", "theagencyre.com", "aegpresents.com", "kernmedical.com", "playstation.com", "nbcuniversal.com", "unitedtalent.com", "landseahomes.com", "carbonhealth.com", "sonypictures.com", 
+					"eastwestbank.com", "borregohealth.org", "scrippshealth.org", "universalmusic.com", "commercecasino.com", "paradigmagency.com", "discoverylandco.com", "relativityspace.com", "adventisthealth.org", "molinahealthcare.com", 
+					"mrcentertainment.com", "createmusicgroup.com", "dmg-entertainment.com", "firstfoundationinc.com", "stanfordhealthcare.org", "thecheesecakefactory.com", "entertainmentstudios.com", "discoverybehavioralhealth.com", 
+					"lakeshorelearning.com", "amat.com", "laird.com", "fbmsales.com"]
+
+		df = df[~df["Website"].str.contains("|".join(excluded_court + excluded_city + excluded_county + excluded_health + excluded_medical + excluded_bio))]
+		df = df[~df["Website"].str.contains("|".join(excluded_entertainment + excluded_studio + excluded_media + excluded_music + excluded_tv + excluded_film))]
+		df = df[~df["Website"].str.contains("|".join(excluded_bank + excluded_financial + excluded_insurance + unwanted))]
+
+		df = df.sort_values(by=["City", "Website", "Name"], ignore_index=True)
+		df = df.reset_index(drop=True)
+
+		print(df.head())
+		print(df.tail())
+		print(len(df))
+
+		df.to_csv("ca-lawyers-with-email-and-website-da-score-30-final-list.csv", index=False)
+
+	def random_processing1(self):
+		unwanted1 = ["bankofamerica", "waltdisney", "progressive.com", "discoverybehavioralhealth.com", "molinahealthcare.com", "sonypictures.com", "mrcentertainment.com", 
+					"mavtv.com", "legionm.com", "livenation.com", "warnerbros.com", "playstation.com", "thecheesecakefactory.com", "entertainmentstudios.com", "createmusicgroup.com", 
+					"relativityspace.com", "viacomcbs.com", "wellsfargo.com", "virginorbit.com", "aegpresents.com", "paramount.com", "roadrunner.com", "brightview.com", "dollskill.com", 
+					"checkerspot.com", "rocketmail.com", "protonmail.com", "earthlink.net", "sbcglobal.net", "deloitte.com", "samsung.com", "salesforce.com", "facebook.com", "linkedin.com", 
+					"calfund.org", "tinyurl.com", "firstfoundationinc.com", "bridgebank.com", "frbsf.org", "montecito.bank", "eastwestbank.com", "silvergate.com", "1cbank", "kernmedical.com", 
+					"stanfordhealthcare.org", "phcdocs.org", "icumed.com", "scrippshealth.org", "verizon.net", "verizon.com", "comcast.net", "hotmail.com", "outlook.com", "udacity.com", 
+					"chevron.com", "firstam.com", "agilent.com", "8minute.com", "carbonhealth.com", "hingehealth.com", "altamed.org", "davita.com", "aidshealth.org", "uclahealth.org", "iehp.org", 
+					"adventisthealth.org", "coveredca.com", "commercecasino.com", "abbott.com", "hotbench.tv", "teamwass.com", "viacomcbs.com", "fremantle.com", "pacbell.net", "disney.com", 
+					"cydcor.com", "yandex.com", "google.com", "icloud.com", "epson.com", "tesla.com", "yahoo.com", "gmail.com", "smartvoter.org", "rivcoda.org", "ovationtv.com", "tubitv.com", 
+					"intel.com", "nvidia.com", "servicenow.com", "qualcomm.com", "nbcuniversal.com", "peacocktv.com", "lucasfilm.com", "ah4r.com", "denovahomes.com", "khov.com", "gvhomes.com", 
+					"landseahomes.com", "homebaseccc.org", "universalmusic.com", "ingrooves.com", "sonic.net", "apple.com", "vna.health", "acphd.org", "sfhp.org", "cbre.com", "zoho.com", "qnet.com", 
+					"scif.com", "mail.com", "uhc.com", "wmg.com", "dga.org", "cnb.com", "msn.com", "att.net", "aol.com", "gmx.com", "hpe.com", "qq.com", "me.com", "cs.com", "gmx.us", "bit.ly", "ca.us", 
+					".edu", ".gov", ".mil"]
+
+		unwanted2 = [".edu", ".gov", ".mil", "ca.us", "1cbank", "qq.com", "me.com", "cs.com", "gmx.us", "bit.ly", "uhc.com", "wmg.com", "dga.org", "cnb.com", "msn.com", "att.net", "aol.com", "mac.com", "mgm.com", "cox.net", "zorro.com", 
+					"gmx.com", "hpe.com", "live.com", "divx.com", "iehp.org", "ah4r.com", "khov.com", "sfhp.org", "cbre.com", "zoho.com", "qnet.com", "scif.com", "mail.com", "mavtv.com", "frbsf.org", "epson.com", "bayer.com", 
+					"tesla.com", "yahoo.com", "gmail.com", "intel.com", "sonic.net", "apple.com", "acphd.org", "waltdisney", "edf-re.com", "icumed.com", "davita.com", "abbott.com", "disney.com", "cydcor.com", "mindspring.com", "borregohealth.org", 
+					"yandex.com", "google.com", "icloud.com", "tubitv.com", "nvidia.com", "vna.health", "legionm.com", "samsung.com", "calfund.org", "tinyurl.com", "phcdocs.org", "verizon.net", "anaheim.net", "oscars.org", "pmhd.org", 
+					"verizon.com", "comcast.net", "hotmail.com", "outlook.com", "udacity.com", "chevron.com", "firstam.com", "agilent.com", "8minute.com", "altamed.org", "hotbench.tv", "pacbell.net", "netscape.net", "studio71us.com", 
+					"rivcoda.org", "gvhomes.com", "deloitte.com", "facebook.com", "linkedin.com", "teamwass.com", "qualcomm.com", "bankofamerica", "viacomcbs.com", "paramount.com", "dollskill.com", "theagencyre.com", "unitedtalent.com", 
+					"earthlink.net", "sbcglobal.net", "coveredca.com", "viacomcbs.com", "fremantle.com", "ovationtv.com", "peacocktv.com", "lucasfilm.com", "ingrooves.com", "livenation.com", "wmeagency.com", "psln.com", "cbbank.com", 
+					"warnerbros.com", "wellsfargo.com", "roadrunner.com", "brightview.com", "rocketmail.com", "protonmail.com", "salesforce.com", "bridgebank.com", "montecito.bank", "silvergate.com", 
+					"aidshealth.org", "uclahealth.org", "smartvoter.org", "servicenow.com", "progressive.com", "playstation.com", "virginorbit.com", "aegpresents.com", "checkerspot.com", "kernmedical.com", 
+					"hingehealth.com", "denovahomes.com", "homebaseccc.org", "sonypictures.com", "eastwestbank.com", "carbonhealth.com", "nbcuniversal.com", "landseahomes.com", "scrippshealth.org", 
+					"commercecasino.com", "universalmusic.com", "relativityspace.com", "adventisthealth.org", "molinahealthcare.com", "mrcentertainment.com", "createmusicgroup.com", "firstfoundationinc.com", 
+					"stanfordhealthcare.org", "thecheesecakefactory.com", "entertainmentstudios.com", "discoverybehavioralhealth.com"]
+					
+		unwanted3 = [".edu", ".gov", ".mil", "ca.us", "1cbank", "qq.com", "me.com", "cs.com", "fox.com", "gmx.us", "bit.ly", "uhc.com", "wmg.com", "dga.org", "cnb.com", "msn.com", "att.net", "aol.com", "mac.com", "zorro.com", 
+					"gmx.com", "hpe.com", "divx.com", "iehp.org", "ah4r.com", "khov.com", "sfhp.org", "cbre.com", "zoho.com", "qnet.com", "scif.com", "mail.com", "mavtv.com", "frbsf.org", "epson.com", "bayer.com", 
+					"tesla.com", "yahoo.com", "gmail.com", "intel.com", "sonic.net", "apple.com", "acphd.org", "waltdisney", "edf-re.com", "icumed.com", "davita.com", "abbott.com", "disney.com", "cydcor.com", 
+					"yandex.com", "google.com", "icloud.com", "tubitv.com", "nvidia.com", "vna.health", "legionm.com", "samsung.com", "calfund.org", "tinyurl.com", "phcdocs.org", "verizon.net", "anaheim.net", 
+					"verizon.com", "comcast.net", "hotmail.com", "outlook.com", "udacity.com", "chevron.com", "firstam.com", "agilent.com", "8minute.com", "altamed.org", "hotbench.tv", "pacbell.net", "softbank.com", "dmg-entertainment.com", 
+					"rivcoda.org", "gvhomes.com", "deloitte.com", "facebook.com", "linkedin.com", "teamwass.com", "qualcomm.com", "bankofamerica", "viacomcbs.com", "paramount.com", "dollskill.com", "fandango.com", "bronstudios.com", 
+					"earthlink.net", "sbcglobal.net", "coveredca.com", "viacomcbs.com", "fremantle.com", "ovationtv.com", "peacocktv.com", "lucasfilm.com", "ingrooves.com", "livenation.com", 
+					"warnerbros.com", "wellsfargo.com", "roadrunner.com", "brightview.com", "rocketmail.com", "protonmail.com", "salesforce.com", "bridgebank.com", "montecito.bank", "silvergate.com", 
+					"aidshealth.org", "uclahealth.org", "smartvoter.org", "servicenow.com", "progressive.com", "playstation.com", "virginorbit.com", "aegpresents.com", "checkerspot.com", "kernmedical.com", 
+					"hingehealth.com", "denovahomes.com", "homebaseccc.org", "sonypictures.com", "eastwestbank.com", "carbonhealth.com", "nbcuniversal.com", "landseahomes.com", "scrippshealth.org", 
+					"commercecasino.com", "universalmusic.com", "relativityspace.com", "adventisthealth.org", "molinahealthcare.com", "mrcentertainment.com", "createmusicgroup.com", "firstfoundationinc.com", 
+					"discoverylandco.com", "stanfordhealthcare.org", "thecheesecakefactory.com", "entertainmentstudios.com", "discoverybehavioralhealth.com", "paradigmagency.com", "unitedtalent.com"]
+
+		unwanted4 = sorted(set(unwanted2 + unwanted3), key=len)
+
+		print(unwanted4)
+
+	def random_processing2(self):
+		df = pd.read_csv("ca-lawyers-with-email-and-website-da-score-30-batch-2.csv", na_filter=False)
+
+		print(df[df["Law Firm"].str.contains("food", case=False, na=False)]["Website"].unique().tolist())
+		print(df[df["Website"].str.contains("food", case=False, na=False)]["Website"].unique().tolist())
+		print(df[df["Email"].str.contains("food", case=False, na=False)]["Website"].unique().tolist())
+
+	def random_processing3(self):
+		df = pd.read_csv("ca-lawyers-with-email-and-website-da-score-30-final-list.csv", na_filter=False)
+
+		print(len(df["Website"].unique()))
+
+		df1 = df[df["Email"] == "not available"]
+		df1 = df1.reset_index(drop=True)
+
+		print(df1.head())
+		print(df1.tail())
+		print(len(df1))
+
+		df2 = df[df["Law Firm"] == ""]
+		df2 = df2.reset_index(drop=True)
+
+		print(df2.head())
+		print(df2.tail())
+		print(len(df2))
+
 def main():
 	start = time.time()
 
@@ -1195,7 +1710,13 @@ def main():
 	#scraper.get_missing_da_scores()
 	#scraper.final_processing4()
 	#scraper.clean_lawyers_data2()
-	scraper.final_processing9()
+	#scraper.final_processing8()
+	#scraper.final_processing9()
+	#scraper.final_processing11()
+	#scraper.final_processing12()
+	#scraper.final_processing13()
+	#scraper.final_processing14()
+	scraper.random_processing3()
 
 	end = time.time()
 
